@@ -67,11 +67,6 @@
     --header-logo-link-top: -1rem;
     --header-logo-link-left: 0; */
 
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-    }
-  
     /** FOOTER **/
     --footer-padding: 5rem 0 1rem;
   
@@ -275,6 +270,11 @@
          background: transparent;
   }
   
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
   /* .header-logo {
     position: var(--header-logo-position);
   }
