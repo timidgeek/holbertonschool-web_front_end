@@ -4,6 +4,7 @@
 
 The purpose of this project is to learn abot HTML forms, which are used to collect user input. This is made possible my the ```<input>``` HTML element, deemed one of the most powerful and complex elements in all of HTML, due to sheer number of combinations of input types and attributes.
 
+
 ## Learning Objectives:
 - How to create an HTML5 form
 - How to choose the right input type
@@ -22,15 +23,13 @@ The purpose of this project is to learn abot HTML forms, which are used to colle
 
 How an ```<input>``` works varies depending on its type attribute. Below are a few (but not all!) examples for input types:
 
-Type    | Description | Basic Examples
-------- | ----------- | --------------
-button  | A push button, empty by default | <input type="button" name="button" value="Button">
-checkbox | A check box allowing single values to be selected/deselected | <input type="checkbox" name="checkbox">
-color | Opens  a color picker | <input type="color" name="color">
-file | Lets users select a file | <input type="file" name="file">
-range | A range widget | <input type="range" name="range">
-
-<center><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">(source)</a></center>
+Type    | Description 
+------- | ----------- 
+button  | A push button, empty by default
+checkbox | A check box allowing single values to be selected/deselected
+color | Opens  a color picker
+file | Lets users select a file
+range | A range widget
 
 ## Attributes:
 
@@ -42,7 +41,12 @@ min | ```date```, ```month```, ```week```, ```time```, ```datetime-local```, ```
 value | all except ```image``` | The initial value of the control
 alt | ```image``` | alt attribute for the image type. Required for accessibility
 
-<center><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">(source)</a></center>
+## Resources:
+- [Form Input Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+- [Web Form Usability](https://www.smashingmagazine.com/2011/11/extensive-guide-web-form-usability/)
+- [Forms - UX Movement](https://uxmovement.com/category/forms/)
+- [Placehoders in Form Fields are Harmful (Video)](https://www.nngroup.com/videos/placeholders-form-fields/)
+- [The Anatomy of Accessible Forms: Best Practices](https://www.deque.com/blog/anatomy-of-accessible-forms-best-practices/)
 
 ## Contributors: 
 
