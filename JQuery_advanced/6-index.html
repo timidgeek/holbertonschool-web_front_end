@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 6</title>
+        <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+      <script type="application/javascript">
+        $(document).ready(function() {
+          createFamilyTree();
+          createForm();
+        });
+
+        function createFamilyTree() {
+          $("body").append(
+            $("<table>").append(
+              $("<thead>").append(
+                $("<tr>").append(
+                  $("<th>").text("Firstname"),
+                  $("<th>").text("Lastname")
+                )
+              ),
+              $("<tbody>").append( // leave blank to create empty body
+              )
+            )
+          );
+        }
+
+        function addNewMember(firstName, lastName, position) {
+          let newMember = $("<tr>").append(
+                $("<td>").text(firstName),
+                $("<td>").text(lastName),
+                $("<td>").text("(x)").css("background-color", "orange").click(function() {
+                  newMember.remove();
+                })
+              );
+            if (position === "before") {
+              $("tbody").prepend(newMember); // prepend - add to the top
+            } else {
+              $("tbody").append(newMember); // add new member to bottom of table
+            }
+        }
+        
+        function createForm() {
+          const inputOne = $("<input>").attr("type", "text"); // declare input variable with jQuery
+          const inputTwo = $("<input>").attr("type", "text");
+
+          const select = $("<select>").append( // before and after selector
+            $("<option>").attr("value", "before").text("Before"),
+            $("<option>").attr("value", "after").text("After")
+          );
+
+          const submit = $("<input>").attr("type", "submit").click(function () { // submit button
+            let firstName = $("input[type='text']").first().val();
+            let lastName = $("input[type='text']:nth-of-type(2)").val();
+            let position = $("select").val();
+            addNewMember(firstName, lastName, position);
+          });
+
+          $("table").before(inputOne);
+          $("table").before(inputTwo);
+          $("table").before(select);
+          $("table").before(submit);
+        }
+      </script>
+
+
+    </body>
+
+</html>
