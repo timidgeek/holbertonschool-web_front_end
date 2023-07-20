@@ -3,7 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <title>Task 8</title>
-  <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+
+  <!-- jquery linky -->
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous">
+</script>
+
 </head>
   <body>
 
@@ -16,21 +23,33 @@
         const ul = $("ul");
         const li = $("<li></li>");
         const firstPara = $("<p></p>").html(`<span>${id} - <b>${title}</b></span>`);
-        const secondPara = $("<p></p>").text(snippet);
+        const secondPara = $("<p></p>").html(snippet);
         li.append(firstPara, secondPara);
         ul.append(li);
+
+        // $("ul").not("#pagination").append(fiirstPara, secondPara);
       }
 
       function queryWikipedia(search, offset = 0) {
         const itemsPerPage = 10;
-        const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${search}&sroffset=${offset}&srlimit=${itemsPerPage}&format=json`;
 
         $.ajax({
-          url: apiUrl,
-          dataType: 'jsonp',
+          url: `https://en.wikipedia.org/w/api.php`,
+          type: "GET",
+          data: {
+            action: 'query',
+            format: 'json',
+            list: 'search',
+            // srlimit: itemsPerPage,
+            srsearch: search,
+            origin: "*",
+            srprop: "snippet"
+          },
+          dataType: 'json',
           success: function (data) {
             const results = data.query.search;
             const totalHits = data.query.searchinfo.totalhits;
+            $("ul").not("#pagination").empty(); // refreshes to new result page, clears old content so that only new content is displayed
             results.forEach((result) => {
               addNewArticle(result.pageid, result.title, result.snippet);
             });
@@ -54,6 +73,7 @@
         body.append(form, ul, pagination);
 
         form.on("submit", function (event) {
+          console.log("I am trying!")
           event.preventDefault();
           const searchValue = inputText.val();
           queryWikipedia(searchValue);
@@ -61,19 +81,20 @@
       }
 
       function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
-        const pagination = $("#pagination");
-        pagination.empty();
+        $("#pagination").empty();
         const totalPages = Math.ceil(numberOfItems / itemsPerPage);
         for (let i = 0; i < totalPages; i++) {
-          const li = $("<li></li>").text(i + 1);
-          if (i * itemsPerPage === currentOffset) {
-            li.addClass("active");
-          }
-          li.on("click", function () {
+          const li = $("<li>").css({
+            "cursor": "pointer",
+            "margin-left": "10px",
+            "display": "inline",
+            "font-weight": i * itemsPerPage === currentOffset ? "bold " : "normal"
+          }).text(i + 1).click(function () {
             const offset = i * itemsPerPage;
-            queryWikipedia(inputText.val(), offset);
+            queryWikipedia($('input[type="text"]').val(), offset);
           });
-          pagination.append(li);
+
+          $("#pagination").append(li);
         }
       }
     </script>

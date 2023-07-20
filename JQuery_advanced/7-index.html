@@ -5,8 +5,10 @@
 
         <meta charset="utf-8" />
         <title>Task 7</title>
-        <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
-
+        <script
+        src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -26,11 +28,20 @@
         }
 
       function queryWikipedia(search) {
-        const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${search}&format=json`;
+        const apiUrl = `https://en.wikipedia.org/w/api.php`;
 
         $.ajax({
           url: apiUrl,
-          dataType: 'jsonp',
+          type: "GET",
+          data: {
+            action: 'query',
+            format: 'json',
+            list: 'search',
+            srsearch: search,
+            origin: "*",
+            srprop: "snippet"
+          },
+          dataType: 'json',
           success: function (data) {
             const results = data.query.search;
             results.forEach((result) => {
@@ -54,6 +65,7 @@
         body.append(form, ul);
 
         form.on("submit", function (event) {
+          
           event.preventDefault();
           const searchValue = inputText.val();
           queryWikipedia(searchValue);
